@@ -3,16 +3,17 @@
 
 typedef struct Input_st Input;
 
-struct Input_st{
+struct Input_st
+{
 	// BYTE 1
-	unsigned char garbage   :3;
-	unsigned char start     :1;
+	unsigned char Garbage   :3;
+	unsigned char Start     :1;
 	unsigned char Y         :1;
 	unsigned char X         :1;
 	unsigned char B         :1;
 	unsigned char A         :1;
 	// BYTE 2
-	unsigned char garbage1  :1;
+	unsigned char Garbage1  :1;
 	unsigned char L         :1;
 	unsigned char R         :1;
 	unsigned char Z         :1;
