@@ -1,0 +1,12 @@
+BITS4		o
+BITS5		o
+BITS6		o
+BITS7		o
+BITS8		o
+RESET		i
+ZERO		o
+CLOCK		i
+BITS0		o
+BITS1		o
+BITS2		o
+BITS3		o

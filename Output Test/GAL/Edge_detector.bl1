@@ -1,0 +1,24 @@
+#$ TOOL ispLEVER Classic 1.7.00.05.28.13
+#$ DATE Sat Nov 21 17:24:10 2015
+#$ TITLE Edge_detector
+#$ MODULE edge_detector
+#$ JEDECFILE edge_detector
+#$ PINS 5 inpin:2 outpin:14 d0:17 d1:18 d2:19
+
+.model edge_detector
+.inputs inpin.BLIF d0.BLIF d1.BLIF d2.BLIF
+.outputs outpin d0 d1 d2
+.names inpin.BLIF d2.BLIF outpin
+11 1
+0- 0
+-0 0
+.names inpin.BLIF d0
+0 1
+1 0
+.names d0.BLIF d1
+0 1
+1 0
+.names d1.BLIF d2
+0 1
+1 0
+.end

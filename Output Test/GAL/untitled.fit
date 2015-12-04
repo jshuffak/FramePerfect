@@ -1,0 +1,3 @@
+Note 4000: Using device architecture type: Registered Mode.
+		   There is only one Asynchronous Reset(.AR) and one Synchronous Preset(.SP)
+		   which are used for all registers.

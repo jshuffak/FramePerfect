@@ -1,0 +1,37 @@
+MODULE Output_Unit
+
+TITLE 'Output_Unit'
+
+DECLARATIONS
+
+CLOCK pin 1; 				//A one microsecond clock
+INCLK pin 2;				//Clock this pin when a bit needs input into the shift register
+OUT_BEGIN pin 3;			//Clock this pin to begin the output sequence (Should hold for atleast 1us)
+MSB pin 4;				//This is the input from the shift register
+ZERO pin 6;				//If the bit counter is zero (we are done doing things)
+
+PH0..PH1 pin 7..8;				//The phase counter (least two significant bits of the counter)
+
+PULL_DOWN pin 23 istype 'com';		//If the line needs pulled down
+SCLK pin 15 istype 'com';		//Shift register clock
+COUNTER_RESET pin 16 istype 'com';	//If the counter needs reset
+
+OUTPUT_ON node istype 'reg';		//NOT OUPUT.  Whether or not we are currently outputting.
+OUTPUT_ON_BUFFER node istype 'reg';
+
+
+EQUATIONS
+
+SCLK = INCLK # (!PH1 & !PH0); //Clock the shift register when the micro tells it to or the current bit enters its final phase
+COUNTER_RESET = !OUTPUT_ON;  //Reset the counter if the output is not on
+
+
+PULL_DOWN = OUTPUT_ON.Q & ((PH1&PH0) #(!MSB&(PH0$PH1))) ;
+
+
+OUTPUT_ON.CLK = CLOCK;
+OUTPUT_ON.D = OUTPUT_ON.Q # OUT_BEGIN;
+OUTPUT_ON.AR = ZERO;
+
+END
+

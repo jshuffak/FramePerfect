@@ -1,0 +1,37 @@
+ispLEVER Classic 1.7.00.05.28.13 Linked Equations File
+Copyright(C), 1992-2013, Lattice Semiconductor Corp.
+All Rights Reserved.
+
+Design edge_detector created Sat Nov 21 17:08:54 2015
+
+Title: Edge_detector
+
+ P-Terms   Fan-in  Fan-out  Type  Name (attributes)
+---------  ------  -------  ----  -----------------
+   1/1        1        1    Pin   out_pin.AR 
+   1          0        1    Pin   out_pin.D 
+   1/1        1        1    Pin   out_pin.C 
+=========
+   3/2          Best P-Term Total: 3
+                       Total Pins: 2
+                      Total Nodes: 0
+            Average P-Term/Output: 1
+
+
+Equations:
+
+out_pin.AR = (out_pin.Q);
+
+out_pin.D = (1);
+
+out_pin.C = (!in_pin);
+
+
+Reverse-Polarity Equations:
+
+!out_pin.AR = (!out_pin.Q);
+
+!out_pin.D = (0);
+
+!out_pin.C = (in_pin);
+

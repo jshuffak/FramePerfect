@@ -1,0 +1,10 @@
+COUNTER_RESET		o
+PULL_DOWN		o
+OUT_BEGIN		i
+PH0		i
+PH1		i
+ZERO		i
+INCLK		i
+CLOCK		i
+SCLK		o
+MSB		i

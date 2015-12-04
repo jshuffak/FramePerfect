@@ -1,0 +1,257 @@
+
+
+                                                                      Page 1
+ispLEVER Classic 1.7.00.05.28.13  -  Device Utilization Chart         Sat Nov 28 17:12:46 2015
+
+CounterV3
+
+
+
+--------------------------------------------------------------------------------
+
+Module                   : 'counterv3'
+
+--------------------------------------------------------------------------------
+
+Input files:
+
+    ABEL PLA file        : untitled.tt3
+    Device library       : P22V10G.dev
+
+Output files:
+
+    Report file          : untitled.rpt
+    Programmer load file : untitled.jed
+
+--------------------------------------------------------------------------------
+
+
+                                                                      Page 2
+ispLEVER Classic 1.7.00.05.28.13  -  Device Utilization Chart         Sat Nov 28 17:12:46 2015
+
+CounterV3
+
+P22V10G Programmed Logic:
+--------------------------------------------------------------------------------
+
+
+
+ZERO     = (  !BITS2.Q & !BITS3.Q & !BITS4.Q & !BITS5.Q & !BITS6.Q & !BITS7.Q 
+              & !BITS8.Q );
+
+ONE     = (  BITS2.Q & !BITS3.Q & !BITS4.Q & !BITS5.Q & !BITS6.Q & !BITS7.Q 
+             & !BITS8.Q );
+
+BITS2.D   = (  !RESET & BITS2.Q & BITS1 
+             #   !RESET & BITS2.Q & BITS0 
+             #   !RESET & !BITS2.Q & !BITS1 & !BITS0 ); " ISTYPE 'BUFFER'
+BITS2.C   = (  CLOCK );
+
+BITS3.D   = (  !RESET & BITS2.Q & BITS3.Q 
+             #   !RESET & BITS1 & BITS3.Q 
+             #   !RESET & BITS0 & BITS3.Q 
+             #   !RESET & !BITS2.Q & !BITS1 & !BITS0 & !BITS3.Q );
+           " ISTYPE 'BUFFER'
+BITS3.C   = (  CLOCK );
+
+BITS4.D   = (  !RESET & BITS2.Q & BITS4.Q 
+             #   !RESET & BITS1 & BITS4.Q 
+             #   !RESET & BITS0 & BITS4.Q 
+             #   !RESET & BITS3.Q & BITS4.Q 
+             #   !RESET & !BITS2.Q & !BITS1 & !BITS0 & !BITS3.Q & !BITS4.Q );
+           " ISTYPE 'BUFFER'
+BITS4.C   = (  CLOCK );
+
+BITS5.D   = (  !RESET & BITS2.Q & BITS5.Q 
+             #   !RESET & BITS1 & BITS5.Q 
+             #   !RESET & BITS0 & BITS5.Q 
+             #   !RESET & BITS3.Q & BITS5.Q 
+             #   !RESET & BITS4.Q & BITS5.Q 
+             #   !RESET & !BITS2.Q & !BITS1 & !BITS0 & !BITS3.Q & !BITS4.Q 
+               & !BITS5.Q ); " ISTYPE 'BUFFER'
+BITS5.C   = (  CLOCK );
+
+BITS6.D   = (  !RESET & BITS2.Q & BITS6.Q 
+             #   !RESET & BITS1 & BITS6.Q 
+             #   !RESET & BITS0 & BITS6.Q 
+             #   !RESET & BITS3.Q & BITS6.Q 
+             #   !RESET & BITS4.Q & BITS6.Q 
+             #   !RESET & BITS5.Q & BITS6.Q 
+             #   !RESET & !BITS2.Q & !BITS1 & !BITS0 & !BITS3.Q & !BITS4.Q 
+               & !BITS5.Q & !BITS6.Q ); " ISTYPE 'BUFFER'
+BITS6.C   = (  CLOCK );
+
+BITS7.D   = (  !RESET & BITS2.Q & BITS7.Q 
+             #   !RESET & BITS1 & BITS7.Q 
+             #   !RESET & BITS0 & BITS7.Q 
+             #   !RESET & BITS3.Q & BITS7.Q 
+             #   !RESET & BITS4.Q & BITS7.Q 
+
+
+                                                                      Page 3
+ispLEVER Classic 1.7.00.05.28.13  -  Device Utilization Chart         Sat Nov 28 17:12:46 2015
+
+CounterV3
+
+P22V10G Programmed Logic:
+--------------------------------------------------------------------------------
+
+
+
+             #   !RESET & BITS5.Q & BITS7.Q 
+             #   !RESET & BITS6.Q & BITS7.Q 
+             #   !RESET & !BITS2.Q & !BITS1 & !BITS0 & !BITS3.Q & !BITS4.Q 
+               & !BITS5.Q & !BITS6.Q & !BITS7.Q ); " ISTYPE 'BUFFER'
+BITS7.C   = (  CLOCK );
+
+BITS8.D   = (  RESET 
+             #   BITS2.Q & BITS8.Q 
+             #   BITS1 & BITS8.Q 
+             #   BITS0 & BITS8.Q 
+             #   BITS3.Q & BITS8.Q 
+             #   BITS4.Q & BITS8.Q 
+             #   BITS5.Q & BITS8.Q 
+             #   BITS6.Q & BITS8.Q 
+             #   BITS7.Q & BITS8.Q 
+             #   !BITS2.Q & !BITS1 & !BITS0 & !BITS3.Q & !BITS4.Q & !BITS5.Q 
+               & !BITS6.Q & !BITS7.Q & !BITS8.Q ); " ISTYPE 'BUFFER'
+BITS8.C   = (  CLOCK );
+
+BUFFERED_OUT_BEGIN.D   = (1); " ISTYPE 'BUFFER'
+BUFFERED_OUT_BEGIN.C   = (  CLOCK );
+BUFFERED_OUT_BEGIN.AR  = (  OUT_BEGIN );
+
+
+
+                                                                      Page 4
+ispLEVER Classic 1.7.00.05.28.13  -  Device Utilization Chart         Sat Nov 28 17:12:46 2015
+
+CounterV3
+
+P22V10G Chip Diagram:
+--------------------------------------------------------------------------------
+
+
+
+
+                                   P22V10G
+
+                         +---------\       /---------+
+                         |          \     /          |
+                         |           -----           |
+                   CLOCK |  1                    24  | Vcc                     
+                         |                           |
+                         |  2                    23  | BITS2                   
+                         |                           |
+                         |  3                    22  | BITS3                   
+                         |                           |
+                         |  4                    21  | BITS4                   
+                         |                           |
+                         |  5                    20  | BITS5                   
+                         |                           |
+                         |  6                    19  | BITS6                   
+                         |                           |
+                         |  7                    18  | BITS7                   
+                         |                           |
+               OUT_BEGIN |  8                    17  | BITS8                   
+                         |                           |
+                   BITS1 |  9                    16  | BUFFERED_OUT_BEGIN      
+                         |                           |
+                   BITS0 | 10                    15  | ONE                     
+                         |                           |
+                   RESET | 11                    14  | ZERO                    
+                         |                           |
+                     GND | 12                    13  |                         
+                         |                           |
+                         |                           |
+                         `---------------------------'
+
+                        SIGNATURE: N/A
+
+
+                                                                      Page 5
+ispLEVER Classic 1.7.00.05.28.13  -  Device Utilization Chart         Sat Nov 28 17:12:46 2015
+
+CounterV3
+
+P22V10G Resource Allocations:
+--------------------------------------------------------------------------------
+
+
+
+        Device        | Resource  |   Design    |
+       Resources      | Available | Requirement | Unused
+======================|===========|=============|==============
+                      |           |             |
+Input Pins:           |           |             |
+                      |           |             |
+          Input:      |     12    |      5      |    7 ( 58 %)
+                      |           |             |
+Output Pins:          |           |             |
+                      |           |             |
+          In/Out:     |     10    |     10      |    0 (  0 %)
+          Output:     |      -    |      -      |    -
+                      |           |             |
+Buried Nodes:         |           |             |
+                      |           |             |
+          Input Reg:  |      -    |      -      |    -
+          Pin Reg:    |     10    |      8      |    2 ( 20 %)
+          Buried Reg: |      -    |      -      |    -
+
+
+                                                                      Page 6
+ispLEVER Classic 1.7.00.05.28.13  -  Device Utilization Chart         Sat Nov 28 17:12:46 2015
+
+CounterV3
+
+P22V10G Product Terms Distribution:
+--------------------------------------------------------------------------------
+
+
+
+            Signal                       |    Pin   | Terms | Terms | Terms
+             Name                        | Assigned | Used  |  Max  | Unused
+=========================================|==========|=======|=======|=======
+ZERO                                     |   14     |   1   |   8   |   7
+ONE                                      |   15     |   1   |  10   |   9
+BITS2.D                                  |   23     |   3   |   8   |   5
+BITS3.D                                  |   22     |   4   |  10   |   6
+BITS4.D                                  |   21     |   5   |  12   |   7
+BITS5.D                                  |   20     |   6   |  14   |   8
+BITS6.D                                  |   19     |   7   |  16   |   9
+BITS7.D                                  |   18     |   8   |  16   |   8
+BITS8.D                                  |   17     |  10   |  14   |   4
+BUFFERED_OUT_BEGIN.D                     |   16     |   1   |  12   |  11
+
+
+     ==== List of Inputs/Feedbacks ====
+
+Signal Name                              | Pin      | Pin Type
+=========================================|==========|=========
+RESET                                    |   11     | INPUT
+BITS1                                    |    9     | INPUT
+BITS0                                    |   10     | INPUT
+CLOCK                                    |    1     | CLK/IN
+OUT_BEGIN                                |    8     | INPUT
+
+
+                                                                      Page 7
+ispLEVER Classic 1.7.00.05.28.13  -  Device Utilization Chart         Sat Nov 28 17:12:46 2015
+
+CounterV3
+
+P22V10G Unused Resources:
+--------------------------------------------------------------------------------
+
+
+
+ Pin   |  Pin   |   Product   | Flip-flop
+Number |  Type  |   Terms     |   Type
+=======|========|=============|==========
+    2  |  INPUT |      -      |    -   
+    3  |  INPUT |      -      |    -   
+    4  |  INPUT |      -      |    -   
+    5  |  INPUT |      -      |    -   
+    6  |  INPUT |      -      |    -   
+    7  |  INPUT |      -      |    -   
+   13  |  INPUT |      -      |    -   

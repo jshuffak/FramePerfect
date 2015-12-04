@@ -1,0 +1,206 @@
+ispLEVER Classic 1.7.00.05.28.13 Linked Equations File
+Copyright(C), 1992-2013, Lattice Semiconductor Corp.
+All Rights Reserved.
+
+Design counterv3 created Sat Nov 28 16:32:03 2015
+
+Title: CounterV3
+
+ P-Terms   Fan-in  Fan-out  Type  Name (attributes)
+---------  ------  -------  ----  -----------------
+   1/7        7        1    Pin   ZERO 
+   1/7        7        1    Pin   ONE 
+   3/4        4        1    Pin   BITS2.D 
+   1/1        1        1    Pin   BITS2.C 
+   4/5        5        1    Pin   BITS3.D 
+   1/1        1        1    Pin   BITS3.C 
+   5/6        6        1    Pin   BITS4.D 
+   1/1        1        1    Pin   BITS4.C 
+   6/7        7        1    Pin   BITS5.D 
+   1/1        1        1    Pin   BITS5.C 
+   7/8        8        1    Pin   BITS6.D 
+   1/1        1        1    Pin   BITS6.C 
+   8/9        9        1    Pin   BITS7.D 
+   1/1        1        1    Pin   BITS7.C 
+  10/9       10        1    Pin   BITS8.D 
+   1/1        1        1    Pin   BITS8.C 
+   1/1        1        1    Pin   BUFFERED_OUT_BEGIN.AR 
+   1          0        1    Pin   BUFFERED_OUT_BEGIN.D 
+   1/1        1        1    Pin   BUFFERED_OUT_BEGIN.C 
+=========
+  55/71         Best P-Term Total: 54
+                       Total Pins: 15
+                      Total Nodes: 0
+            Average P-Term/Output: 4
+
+
+Equations:
+
+ZERO = (!BITS2.Q & !BITS3.Q & !BITS4.Q & !BITS5.Q & !BITS6.Q & !BITS7.Q & !BITS8.Q);
+
+ONE = (BITS2.Q & !BITS3.Q & !BITS4.Q & !BITS5.Q & !BITS6.Q & !BITS7.Q & !BITS8.Q);
+
+BITS2.D = (!RESET & BITS2.Q & BITS1
+     # !RESET & BITS2.Q & BITS0
+     # !RESET & !BITS2.Q & !BITS1 & !BITS0);
+
+BITS2.C = (CLOCK);
+
+BITS3.D = (!RESET & BITS2.Q & BITS3.Q
+     # !RESET & BITS1 & BITS3.Q
+     # !RESET & BITS0 & BITS3.Q
+     # !RESET & !BITS2.Q & !BITS1 & !BITS0 & !BITS3.Q);
+
+BITS3.C = (CLOCK);
+
+BITS4.D = (!RESET & BITS2.Q & BITS4.Q
+     # !RESET & BITS1 & BITS4.Q
+     # !RESET & BITS0 & BITS4.Q
+     # !RESET & BITS3.Q & BITS4.Q
+     # !RESET & !BITS2.Q & !BITS1 & !BITS0 & !BITS3.Q & !BITS4.Q);
+
+BITS4.C = (CLOCK);
+
+BITS5.D = (!RESET & BITS2.Q & BITS5.Q
+     # !RESET & BITS1 & BITS5.Q
+     # !RESET & BITS0 & BITS5.Q
+     # !RESET & BITS3.Q & BITS5.Q
+     # !RESET & BITS4.Q & BITS5.Q
+     # !RESET & !BITS2.Q & !BITS1 & !BITS0 & !BITS3.Q & !BITS4.Q & !BITS5.Q);
+
+BITS5.C = (CLOCK);
+
+BITS6.D = (!RESET & BITS2.Q & BITS6.Q
+     # !RESET & BITS1 & BITS6.Q
+     # !RESET & BITS0 & BITS6.Q
+     # !RESET & BITS3.Q & BITS6.Q
+     # !RESET & BITS4.Q & BITS6.Q
+     # !RESET & BITS5.Q & BITS6.Q
+     # !RESET & !BITS2.Q & !BITS1 & !BITS0 & !BITS3.Q & !BITS4.Q & !BITS5.Q & !BITS6.Q);
+
+BITS6.C = (CLOCK);
+
+BITS7.D = (!RESET & BITS2.Q & BITS7.Q
+     # !RESET & BITS1 & BITS7.Q
+     # !RESET & BITS0 & BITS7.Q
+     # !RESET & BITS3.Q & BITS7.Q
+     # !RESET & BITS4.Q & BITS7.Q
+     # !RESET & BITS5.Q & BITS7.Q
+     # !RESET & BITS6.Q & BITS7.Q
+     # !RESET & !BITS2.Q & !BITS1 & !BITS0 & !BITS3.Q & !BITS4.Q & !BITS5.Q & !BITS6.Q & !BITS7.Q);
+
+BITS7.C = (CLOCK);
+
+BITS8.D = (RESET
+     # BITS2.Q & BITS8.Q
+     # BITS1 & BITS8.Q
+     # BITS0 & BITS8.Q
+     # BITS3.Q & BITS8.Q
+     # BITS4.Q & BITS8.Q
+     # BITS5.Q & BITS8.Q
+     # BITS6.Q & BITS8.Q
+     # BITS7.Q & BITS8.Q
+     # !BITS2.Q & !BITS1 & !BITS0 & !BITS3.Q & !BITS4.Q & !BITS5.Q & !BITS6.Q & !BITS7.Q & !BITS8.Q);
+
+BITS8.C = (CLOCK);
+
+BUFFERED_OUT_BEGIN.AR = (OUT_BEGIN);
+
+BUFFERED_OUT_BEGIN.D = (1);
+
+BUFFERED_OUT_BEGIN.C = (CLOCK);
+
+
+Reverse-Polarity Equations:
+
+!ZERO = (BITS2.Q
+     # BITS3.Q
+     # BITS4.Q
+     # BITS5.Q
+     # BITS6.Q
+     # BITS7.Q
+     # BITS8.Q);
+
+!ONE = (!BITS2.Q
+     # BITS3.Q
+     # BITS4.Q
+     # BITS5.Q
+     # BITS6.Q
+     # BITS7.Q
+     # BITS8.Q);
+
+!BITS2.D = (RESET
+     # !BITS2.Q & BITS1
+     # !BITS2.Q & BITS0
+     # BITS2.Q & !BITS1 & !BITS0);
+
+!BITS2.C = (!CLOCK);
+
+!BITS3.D = (RESET
+     # BITS2.Q & !BITS3.Q
+     # BITS1 & !BITS3.Q
+     # BITS0 & !BITS3.Q
+     # !BITS2.Q & !BITS1 & !BITS0 & BITS3.Q);
+
+!BITS3.C = (!CLOCK);
+
+!BITS4.D = (RESET
+     # BITS2.Q & !BITS4.Q
+     # BITS1 & !BITS4.Q
+     # BITS0 & !BITS4.Q
+     # BITS3.Q & !BITS4.Q
+     # !BITS2.Q & !BITS1 & !BITS0 & !BITS3.Q & BITS4.Q);
+
+!BITS4.C = (!CLOCK);
+
+!BITS5.D = (RESET
+     # BITS2.Q & !BITS5.Q
+     # BITS1 & !BITS5.Q
+     # BITS0 & !BITS5.Q
+     # BITS3.Q & !BITS5.Q
+     # BITS4.Q & !BITS5.Q
+     # !BITS2.Q & !BITS1 & !BITS0 & !BITS3.Q & !BITS4.Q & BITS5.Q);
+
+!BITS5.C = (!CLOCK);
+
+!BITS6.D = (RESET
+     # BITS2.Q & !BITS6.Q
+     # BITS1 & !BITS6.Q
+     # BITS0 & !BITS6.Q
+     # BITS3.Q & !BITS6.Q
+     # BITS4.Q & !BITS6.Q
+     # BITS5.Q & !BITS6.Q
+     # !BITS2.Q & !BITS1 & !BITS0 & !BITS3.Q & !BITS4.Q & !BITS5.Q & BITS6.Q);
+
+!BITS6.C = (!CLOCK);
+
+!BITS7.D = (RESET
+     # BITS2.Q & !BITS7.Q
+     # BITS1 & !BITS7.Q
+     # BITS0 & !BITS7.Q
+     # BITS3.Q & !BITS7.Q
+     # BITS4.Q & !BITS7.Q
+     # BITS5.Q & !BITS7.Q
+     # BITS6.Q & !BITS7.Q
+     # !BITS2.Q & !BITS1 & !BITS0 & !BITS3.Q & !BITS4.Q & !BITS5.Q & !BITS6.Q & BITS7.Q);
+
+!BITS7.C = (!CLOCK);
+
+!BITS8.D = (!RESET & BITS2.Q & !BITS8.Q
+     # !RESET & BITS1 & !BITS8.Q
+     # !RESET & BITS0 & !BITS8.Q
+     # !RESET & BITS3.Q & !BITS8.Q
+     # !RESET & BITS4.Q & !BITS8.Q
+     # !RESET & BITS5.Q & !BITS8.Q
+     # !RESET & BITS6.Q & !BITS8.Q
+     # !RESET & BITS7.Q & !BITS8.Q
+     # !RESET & !BITS2.Q & !BITS1 & !BITS0 & !BITS3.Q & !BITS4.Q & !BITS5.Q & !BITS6.Q & !BITS7.Q & BITS8.Q);
+
+!BITS8.C = (!CLOCK);
+
+!BUFFERED_OUT_BEGIN.AR = (!OUT_BEGIN);
+
+!BUFFERED_OUT_BEGIN.D = (0);
+
+!BUFFERED_OUT_BEGIN.C = (!CLOCK);
+

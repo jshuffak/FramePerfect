@@ -1,0 +1,24 @@
+MODULE Edge_detector
+
+TITLE 'Edge_detector'
+
+DECLARATIONS
+
+inpin pin 2;
+outpin pin 14 istype 'com';
+
+d0..d2 pin 17..19 istype 'com';
+
+
+EQUATIONS
+
+d0 = !inpin;
+d1 = !d0;
+d2 = !d1;
+
+outpin = inpin & d2;
+
+
+
+END
+

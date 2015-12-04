@@ -1,0 +1,21 @@
+JDF B
+// Created by Version 1.7 
+PROJECT Untitled
+DESIGN untitled Normal
+DEVKIT GAL22V10C-10LP
+ENTRY ABEL/Schematic
+MODULE edge detector.abl
+MODSTYLE Edge_detector Normal
+MODULE output_unitv2.abl
+MODSTYLE Output_UnitV2 Normal
+MODULE counter.abl
+MODSTYLE Counter Normal
+MODULE counterv2.abl
+MODSTYLE CounterV2 Normal
+MODULE output unit.abl
+MODSTYLE Output_Unit Normal
+MODULE counterv3.abl
+MODSTYLE CounterV3 Normal
+SYNTHESIS_TOOL Synplify
+SIMULATOR_TOOL ActiveHDL
+TOPMODULE CounterV3
