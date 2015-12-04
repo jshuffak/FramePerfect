@@ -1,8 +1,6 @@
 #ifndef INPUT_INCLUDED
 #define INPUT_INCLUDED
 
-#include <stdlib.h>
-
 typedef struct Input_st Input;
 
 struct Input_st{
