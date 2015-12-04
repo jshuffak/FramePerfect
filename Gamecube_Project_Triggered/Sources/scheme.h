@@ -1,0 +1,4 @@
+#ifndef SCHEME_INCLUDED
+#define SCHEME_INCLUDED
+
+#endif /* SCHEME_INCLUDED */
