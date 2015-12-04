@@ -1226,7 +1226,7 @@ UNUSED-OBJECTS SECTION
 ---------------------------------------------------------------------------------------------
 NOT USED PROCEDURES
 microcontroller.c.o:
-  getInput inchar outchar 
+  getInput shiftOutConrollerPacket inchar outchar 
 
 *********************************************************************************************
 COPYDOWN SECTION

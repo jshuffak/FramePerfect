@@ -1,13 +1,19 @@
 #include "microcontroller.h"
 
-
+/* Constant definitions */
 #define INITIALIZEWAIT 26666
 #define ENSURESTARTWAIT 18
 
 /* PIN Definitions */
-#define DATALINE PTT_PTT4
+#define DATALINE              PTT_PTT4
+#define TRANSMISSION_GATE     PTT_PTT5
+#define OUTPUT_BEGIN          PTT_PTT6
 
-void waitForInitialization(void);
+//Static function declarations
+
+static void waitForInitialization(void);
+static void getInput(char* readData);               //Communicate with the controller and console
+static void shiftOutConrollerPacket(char* packet);  //Send the next packet out to the GAL
 
 
 
@@ -138,6 +144,18 @@ void getInput(char* readData){
    for(i=0;i<20;i++); //Hopefully we are done outputting now
    PTT_PTT5=1;        //Re-enable the trasmission gate
   
+}
+
+void shiftOutConrollerPacket(char* packet){
+  int i;
+  byte b;
+  for(i=0;i<8;i++) {
+    b = packet[i];
+    b = (b & 0xF0) >> 4 | (b & 0x0F) << 4;
+    b = (b & 0xCC) >> 2 | (b & 0x33) << 2;
+    b = (b & 0xAA) >> 1 | (b & 0x55) << 1;  //Reverse the order of the bits
+    shiftout(b);
+  }
 }
 
 
