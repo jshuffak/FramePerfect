@@ -20,8 +20,13 @@ extern int EdgeCounter;
 extern byte* FrameByte;
 
 
+//Functions
 void initializations(void);
-void outchar(char x);	// for debugging use only
-char inchar(void);	// for bonus option (terminal input for setting clock)
+char inchar(void);        //Debugging
+void outchar(char x);     //Debugging
+void printout(char* x);   //Print a string to terminal for debugging
+void shiftout(char);      //Shiftout a byte to our good friend the GAL
+void delay(int);          //An arbitary delay function.  Should probably be used for debugging only
+void getInput(char* readData); //Communicate with the controller and console
 
 #endif /* MICRO_INCLUDED */
