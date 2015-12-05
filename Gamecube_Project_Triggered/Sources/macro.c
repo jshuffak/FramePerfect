@@ -17,13 +17,13 @@ GetMacroInput(MacroFrame frame, Input* output)
 {
 
 
-  output->Garbage = Macro_array[(int)frame.Frame/3 + frame.Macro].Garbage;
+  output->Garbage = 0;
   output->Start = Macro_array[(int)frame.Frame/3 + frame.Macro].Start;
   output->Y = Macro_array[(int)frame.Frame/3 + frame.Macro].Y;
   output->X = Macro_array[(int)frame.Frame/3 + frame.Macro].X;
   output->B = Macro_array[(int)frame.Frame/3 + frame.Macro].B;
   output->A = Macro_array[(int)frame.Frame/3 + frame.Macro].A;
-  output->Garbage1 = Macro_array[(int)frame.Frame/3 + frame.Macro].Garbage1;
+  output->Garbage1 = 1;
   output->L = Macro_array[(int)frame.Frame/3 + frame.Macro].L;
   output->R = Macro_array[(int)frame.Frame/3 + frame.Macro].R;
   output->Z = Macro_array[(int)frame.Frame/3 + frame.Macro].Z;
