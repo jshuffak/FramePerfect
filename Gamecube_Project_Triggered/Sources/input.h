@@ -35,7 +35,4 @@ struct Input_st
 	unsigned char RightButt :8;
 };
 
-//extern volatile Input* FrameInput;
-
-
 #endif /* INPUT_INCLUDED */
