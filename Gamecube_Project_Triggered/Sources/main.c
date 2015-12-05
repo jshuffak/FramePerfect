@@ -9,7 +9,7 @@ static void wait40MicroSeconds(void);
 void main(void)
 {
 	initializations();
-	
+
 	for(;;)
 	{
 		if (Transaction_Complete)

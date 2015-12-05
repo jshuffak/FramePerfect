@@ -9,3 +9,8 @@ MacroFrame CurrentFrame = { 0, MACRO1 };
 	Mode 1 = Macro mode
 */
 unsigned char Mode = 0;
+
+Input GetNextInput(Input input)
+{
+	return input;
+}
