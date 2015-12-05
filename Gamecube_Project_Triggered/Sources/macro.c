@@ -5,6 +5,11 @@ Input Macro_array[MAC_1 + MAC_2 + MAC_3 + MAC_4 + MAC_5 + MAC_6 + MAC_7 + MAC_8 
   = { 
       {0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,255,0,0,0,0},
       {3,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0}
+      {0,0,1,0,0,0,0,0,0,0,0,0,0,0,128,128,128,128,0,0},
+      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,128,128,128,128,0,0},
+      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,128,128,128,128,0,0},
+      {3,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0}
+
 
 
         
@@ -37,7 +42,7 @@ GetMacroInput(MacroFrame frame, Input* output)
   output->CStickY = Macro_array[(int)frame.Frame/3 + frame.Macro].CStickY;
   output->LeftButt = Macro_array[(int)frame.Frame/3 + frame.Macro].LeftButt;
   output->RightButt = Macro_array[(int)frame.Frame/3 + frame.Macro].RightButt;
-  if((Macro_array[(int)frame.Frame/3].Garbage == 3 && frame.Frame % 3 == 0))
+  if((Macro_array[(int)frame.Frame/3].Garbage == 3 && (frame.Frame % 3 == 2)))
   {
     
     return 1;
