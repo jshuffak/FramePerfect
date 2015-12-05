@@ -46,6 +46,6 @@ struct MacroFrame_st
 // Gets the next frame of the macro and puts it in "output".
 // Returns a bool value that is true if the returned output is
 // the last last valid macro frame. Otherwise returns false.
-char GetMacroInput(MacroFrame frame, Input* output);
+int GetMacroInput(MacroFrame frame, Input* output);
 
 #endif /* MACRO_INCLUDED */
