@@ -1,7 +1,20 @@
 #include "macro.h"
 
 //Definitions
-Input Macro_array[MAC_1 + MAC_2 + MAC_3 + MAC_4 + MAC_5 + MAC_6 + MAC_7 + MAC_8 + MAC_9 + MAC_10 + MAC_11 + MAC_12 + MAC_13 + MAC_14 + MAC_15 + MAC_16 + MAC_17 + MAC_18 + MAC_19 + MAC_20 + MAC_21 + MAC_22 + MAC_23 + MAC_24 + MAC_25 + MAC_26 + MAC_27 + MAC_28];
+Input Macro_array[MAC_1 + MAC_2 + MAC_3 + MAC_4 + MAC_5 + MAC_6 + MAC_7 + MAC_8 + MAC_9 + MAC_10 + MAC_11 + MAC_12 + MAC_13 + MAC_14 + MAC_15 + MAC_16 + MAC_17 + MAC_18 + MAC_19 + MAC_20 + MAC_21 + MAC_22 + MAC_23 + MAC_24 + MAC_25 + MAC_26 + MAC_27 + MAC_28]
+  = { 
+      {0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,-127,0,0,0,0},
+      {0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,-127,0,0,0,0},
+      {0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,-127,0,0,0,0},
+      {0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+      {0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+      {0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
+
+        
+  };
+
+
+
 
 GetMacroInput(MacroFrame frame, Input* output)
 {
@@ -35,7 +48,6 @@ GetMacroInput(MacroFrame frame, Input* output)
   }
   return 0;
 }
-
 
 
 
