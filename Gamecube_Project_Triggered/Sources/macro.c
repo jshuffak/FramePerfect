@@ -42,7 +42,7 @@ GetMacroInput(MacroFrame frame, Input* output)
   output->CStickY = Macro_array[(int)frame.Frame/3 + frame.Macro].CStickY;
   output->LeftButt = Macro_array[(int)frame.Frame/3 + frame.Macro].LeftButt;
   output->RightButt = Macro_array[(int)frame.Frame/3 + frame.Macro].RightButt;
-  if((Macro_array[(int)frame.Frame/3].Garbage == 3 && (frame.Frame % 3 == 2)))
+  if((Macro_array[(int)frame.Frame/3 + frame.Macro].Garbage == 3 && (frame.Frame % 3 == 2)))
   {
     
     return 1;
