@@ -21,7 +21,7 @@ void main(void)
 			wait40MicroSeconds();
 
 			// Get the next input from the control and send it out
-			//setOutputFrame(GetNextInput(getInputFrame()));
+			setOutputFrame(GetNextInput(getInputFrame()));
 		}
 	}
 }
