@@ -1,8 +1,9 @@
+#define __MICROCONTROLLER
 #include "microcontroller.h"
 
 /* Constant definitions */
 #define INITIALIZEWAIT 26666
-#define ENSURESTARTWAIT 18
+#define ENSURESTARTWAIT 40
 
 /* PIN Definitions */
 #define DATALINE              PTT_PTT4
@@ -15,11 +16,19 @@ static void waitForInitialization(void);
 static void getInput(char* readData);               //Communicate with the controller and console
 static void shiftOutConrollerPacket(char* packet);  //Send the next packet out to the GAL
 
+//global variables
+
+Input InputBuffer;
+Input OutputBuffer;
+byte  Transaction_Complete = 0;
+
+
 
 
 
 
 void initializations()
+
 {
 	DisableInterrupts;
 
@@ -69,17 +78,17 @@ void initializations()
   
   SPICR1 = 0x50;
   SPICR2 = 0x00;
-  SPIBR = 0x10;        
-              
-              
-  DDRT=0x60;
+  SPIBR = 0x10;                    
+  DDRT=0x62;
   //pin 4 will be used to read 
   PTT_PTT5 = 1; //Enable transmission gate
 	
 	//Enable IRQ
-	INTCR_IRQE = 1;
-
+	INTCR_IRQE = 0;
+  TRANSMISSION_GATE = 1;
+  PTT_PTT1 = 1;
 	waitForInitialization();
+	PTT_PTT1 = 0; 
 	
 	//Enable Interrupts
 	EnableInterrupts;
@@ -91,8 +100,14 @@ void initializations()
 // 40 micro seconds for the data line to remain high
 static void waitForInitialization()
 {
-	unsigned int i;
-	for(i = 0; i < INITIALIZEWAIT; i++) { }
+	unsigned int i,j;
+	
+	for(i = 0; i < INITIALIZEWAIT; i++) { 
+	      for(j = 0; j< 10; j++){ }
+	}
+	
+	while(DATALINE){
+	}
 	
 	for(i = 0; i < ENSURESTARTWAIT; i++)
 	{
@@ -107,10 +122,6 @@ static void waitForInitialization()
 void getInput(char* readData){
   int i, currentChar;
   byte bitPos;
-  
-  for(currentChar=0;currentChar<8;currentChar++){
-    readData[currentChar]=0;
-  }
   
   for(currentChar=0;currentChar<25;currentChar++){ //blow through the console data
     while(PTT_PTT4);  //Wait for falling edge
@@ -146,7 +157,7 @@ void getInput(char* readData){
   
 }
 
-void shiftOutConrollerPacket(char* packet){
+static void shiftOutConrollerPacket(char* packet){
   int i;
   byte b;
   for(i=0;i<8;i++) {
@@ -161,6 +172,16 @@ void shiftOutConrollerPacket(char* packet){
 
 interrupt 6 void IRQ_ISR()
 {
+  PTT_PTT1=1;
+  getInput((char*)(&InputBuffer));
+  shiftOutConrollerPacket((char*)(&InputBuffer));
+  Transaction_Complete = 1;
+  PTT_PTT1=0;
+
+
+
+
+  
 
 }
 	
@@ -182,3 +203,36 @@ void outchar(char x)
 	while (!(SCISR1 & 0x80)); /* wait for output buffer empty */
 	SCIDRL = x;
 }
+
+void shiftout(char x) {
+  
+  while(!SPISR_SPTEF == 1) {
+  }
+  
+  if(SPISR_SPTEF == 1) {
+  
+    SPIDR = x;
+  
+  }
+  
+}
+
+Input getInputFrame(void) {
+    int currentChar  ;
+    Input storage = InputBuffer;
+
+    for(currentChar=0;currentChar<8;currentChar++){
+      ((char*)(&InputBuffer))[currentChar]=0;
+    }
+  
+    return InputBuffer;
+}
+void setOutputFrame(Input banana){
+    
+    
+    //this be the echo dawg diggity
+    OutputBuffer = banana;
+    shiftOutConrollerPacket((char*)(&OutputBuffer));
+}
+  
+  
