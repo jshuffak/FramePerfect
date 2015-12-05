@@ -4,8 +4,7 @@
 
 //Definitions
 Input Macro_array[MACRO_SIZE];
-Input Macro_1[MAC_1]
-{ .Garbage = 0, .Start = 0, .Y = 1, .X = 0, .B = 0, .A = 0, .Garbage1 = 0, .L = 0, .R = 0, .Z = 0, .DUp = 0, .DDown = 0, .DRight = 0, .DLeft = 0, .JoyX = 0, .JoyY = 0, .CStickX = 0, .CStickY = 0, .LeftButt = 0, .RightButt = 0};
+Input Macro_1[MAC_1] = { .Garbage = 0, .Start = 0, .Y = 1, .X = 0, .B = 0, .A = 0, .Garbage1 = 0, .L = 0, .R = 0, .Z = 0, .DUp = 0, .DDown = 0, .DRight = 0, .DLeft = 0, .JoyX = 0, .JoyY = 0, .CStickX = 0, .CStickY = 0, .LeftButt = 0, .RightButt = 0};
 
 
 GetMacroInput(MacroFrame frame, Input* output)
