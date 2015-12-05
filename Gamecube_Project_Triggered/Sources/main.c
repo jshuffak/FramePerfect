@@ -2,7 +2,7 @@
 #include "microcontroller.h"
 #include "control.h"
 
-#define CYCLESFOR40MICROWAIT 10
+#define CYCLESFOR40MICROWAIT 160
 
 static void wait40MicroSeconds(void);
 
@@ -12,6 +12,7 @@ void main(void)
 
 	for(;;)
 	{
+		Transaction_Complete = 1;
 		if (Transaction_Complete)
 		{
 			// Clear Transaction_Complete flag

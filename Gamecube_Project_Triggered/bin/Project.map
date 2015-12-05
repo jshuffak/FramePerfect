@@ -28,7 +28,7 @@ Entry point: 0xC029 (_Startup)
 _startupData is allocated at 0xC031 and uses 6 Bytes
 extern struct _tagStartup {
   unsigned nofZeroOut     1
-  _Range   pZeroOut       0x900     302
+  _Range   pZeroOut       0x900     374
   _Copy    *toCopyDownBeg 0xC62C
 } _startupData;
 
@@ -39,9 +39,9 @@ Section Name                    Size  Type     From       To       Segment
 .init                             49     R     0xC000     0xC030   ROM_C000
 .startData                        10     R     0xC031     0xC03A   ROM_C000
 .text                           1513     R     0xC03B     0xC623   ROM_C000
-.copy                             74     R     0xC62C     0xC675   ROM_C000
+.copy                            159     R     0xC62C     0xC6CA   ROM_C000
 .stack                           256   R/W      0x800      0x8FF   RAM
-.data                            279   R/W      0x900      0xA16   RAM
+.data                            351   R/W      0x900      0xA5E   RAM
 .abs_section_8                     1   N/I        0x8        0x8   .absSeg0
 .abs_section_9                     1   N/I        0x9        0x9   .absSeg1
 .abs_section_a                     1   N/I        0xA        0xA   .absSeg2
@@ -265,14 +265,14 @@ Section Name                    Size  Type     From       To       Segment
 .abs_section_17e                   2   N/I      0x17E      0x17F   .absSeg220
 .abs_section_fff2                  2     R     0xFFF2     0xFFF3   .absSeg221
 .abs_section_ffe0                  2     R     0xFFE0     0xFFE1   .absSeg222
-.bss                               7   R/W      0xA17      0xA1D   RAM
+.bss                               7   R/W      0xA5F      0xA65   RAM
 RUNTIME                            8     R     0xC624     0xC62B   ROM_C000
-.common                           16   R/W      0xA1E      0xA2D   RAM
+.common                           16   R/W      0xA66      0xA75   RAM
 .vectSeg223_vect                   2     R     0xFFFE     0xFFFF   .vectSeg223
 
 Summary of section sizes per section type:
-READ_ONLY (R):         67C (dec:     1660)
-READ_WRITE (R/W):      22E (dec:      558)
+READ_ONLY (R):         6D1 (dec:     1745)
+READ_WRITE (R/W):      276 (dec:      630)
 NO_INIT (N/I):         104 (dec:      260)
 
 *********************************************************************************************
@@ -537,11 +537,11 @@ MODULE:                 -- microcontroller.c.o --
      getInputFrame                             C1F8      28      40       1   .text       
      setOutputFrame                            C220      1A      26       1   .text       
 - VARIABLES:
-     Transaction_Complete                       A17       1       1       2   .bss        
+     Transaction_Complete                       A5F       1       1       2   .bss        
      _Vector_6                                 FFF2       2       2       0   .abs_section_fff2
      _Vector_15                                FFE0       2       2       0   .abs_section_ffe0
-     InputBuffer                                A1E       8       8       7   .common     
-     OutputBuffer                               A26       8       8       5   .common     
+     InputBuffer                                A66       8       8       7   .common     
+     OutputBuffer                               A6E       8       8       5   .common     
 MODULE:                 -- control.c.o --
 - PROCEDURES:
      startMacro                                C23A      49      73       7   .text       
@@ -549,20 +549,20 @@ MODULE:                 -- control.c.o --
      GetNextInput                              C345     188     392      14   .text       
 - VARIABLES:
      ActiveScheme                               900       2       2      10   .data       
-     CurrentFrame                               A18       4       4       9   .bss        
-     macroButton                                A1C       1       1       4   .bss        
-     Mode                                       A1D       1       1       4   .bss        
+     CurrentFrame                               A60       4       4       9   .bss        
+     macroButton                                A64       1       1       4   .bss        
+     Mode                                       A65       1       1       4   .bss        
 MODULE:                 -- macro.c.o --
 - PROCEDURES:
      GetMacroInput                             C4CD     157     343      11   .text       
 - VARIABLES:
-     Macro_array                                902     100     256      19   .data       
+     Macro_array                                902     148     328      19   .data       
 MODULE:                 -- scheme.c.o --
 - PROCEDURES:
 - VARIABLES:
-     Scheme1                                    A02       7       7       2   .data       
-     Scheme2                                    A09       7       7       1   .data       
-     Scheme4                                    A10       7       7       1   .data       
+     Scheme1                                    A4A       7       7       2   .data       
+     Scheme2                                    A51       7       7       1   .data       
+     Scheme4                                    A58       7       7       1   .data       
 
 *********************************************************************************************
 MODULE STATISTIC
@@ -574,9 +574,9 @@ MODULE STATISTIC
   rtshc12.c.o (ansisi.lib)                     0      8      0
   microcontroller.c.o                         17    450      4
   control.c.o                                  8    659      0
-  macro.c.o                                  256    343      0
+  macro.c.o                                  328    343      0
   scheme.c.o                                  21      0      0
-  other                                      256     12     74
+  other                                      256     12    159
 
 *********************************************************************************************
 SECTION USE IN OBJECT-ALLOCATION SECTION
@@ -1268,16 +1268,16 @@ OBJECT LIST SORTED BY ADDRESS
      _PERAD                                     274       1       1       0   .abs_section_274
      _PPSAD                                     275       1       1       0   .abs_section_275
      ActiveScheme                               900       2       2      10   .data       
-     Macro_array                                902     100     256      19   .data       
-     Scheme1                                    A02       7       7       2   .data       
-     Scheme2                                    A09       7       7       1   .data       
-     Scheme4                                    A10       7       7       1   .data       
-     Transaction_Complete                       A17       1       1       2   .bss        
-     CurrentFrame                               A18       4       4       9   .bss        
-     macroButton                                A1C       1       1       4   .bss        
-     Mode                                       A1D       1       1       4   .bss        
-     InputBuffer                                A1E       8       8       7   .common     
-     OutputBuffer                               A26       8       8       5   .common     
+     Macro_array                                902     148     328      19   .data       
+     Scheme1                                    A4A       7       7       2   .data       
+     Scheme2                                    A51       7       7       1   .data       
+     Scheme4                                    A58       7       7       1   .data       
+     Transaction_Complete                       A5F       1       1       2   .bss        
+     CurrentFrame                               A60       4       4       9   .bss        
+     macroButton                                A64       1       1       4   .bss        
+     Mode                                       A65       1       1       4   .bss        
+     InputBuffer                                A66       8       8       7   .common     
+     OutputBuffer                               A6E       8       8       5   .common     
      Init                                      C000      29      41       1   .init       
      _Startup                                  C029       8       8       0   .init       
      main                                      C03B      33      51       1   .text       
@@ -1322,10 +1322,10 @@ COPYDOWN SECTION
 ---------------------------------------------------------------------------------------------
 ------- ROM-ADDRESS: 0xC62C ---- SIZE       4 ---
 Filling bytes inserted
- 002C0900
+ 00800900
 ------- ROM-ADDRESS: 0xC630 ---- RAM-ADDRESS: 0x900 ---- SIZE       2 ---
 Name of initialized Object : ActiveScheme
- 0A02
+ 0A4A
 ------- ROM-ADDRESS: 0xC632 ---- SIZE       1 ---
 Filling bytes inserted
  00
@@ -1356,19 +1356,64 @@ Filling bytes inserted
 ------- ROM-ADDRESS: 0xC654 ---- RAM-ADDRESS: 0x924 ---- SIZE       8 ---
 Name of initialized Object : Macro_array:34
  8080808000 000302
-------- ROM-ADDRESS: 0xC65C ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xC65C ---- SIZE       6 ---
 Filling bytes inserted
- 00140A03
-------- ROM-ADDRESS: 0xC660 ---- RAM-ADDRESS: 0xA03 ---- SIZE       6 ---
-Name of initialized Object : Scheme1:1
- 0206070809 0A
-------- ROM-ADDRESS: 0xC666 ---- RAM-ADDRESS: 0xA09 ---- SIZE       7 ---
+ 0000000000 00
+------- ROM-ADDRESS: 0xC662 ---- RAM-ADDRESS: 0x932 ---- SIZE       6 ---
+Name of initialized Object : Macro_array:48
+ 1000808080 80
+------- ROM-ADDRESS: 0xC668 ---- SIZE       4 ---
+Filling bytes inserted
+ 00000000
+------- ROM-ADDRESS: 0xC66C ---- RAM-ADDRESS: 0x93C ---- SIZE      12 ---
+Name of initialized Object : Macro_array:58
+ 8080808000 0040008080 8080
+------- ROM-ADDRESS: 0xC678 ---- SIZE       4 ---
+Filling bytes inserted
+ 00000000
+------- ROM-ADDRESS: 0xC67C ---- RAM-ADDRESS: 0x94C ---- SIZE      12 ---
+Name of initialized Object : Macro_array:74
+ 8000808000 0040008080 8080
+------- ROM-ADDRESS: 0xC688 ---- SIZE       4 ---
+Filling bytes inserted
+ 00000000
+------- ROM-ADDRESS: 0xC68C ---- RAM-ADDRESS: 0x95C ---- SIZE       4 ---
+Name of initialized Object : Macro_array:90
+ 80008080
+------- ROM-ADDRESS: 0xC690 ---- SIZE       4 ---
+Filling bytes inserted
+ 00000000
+------- ROM-ADDRESS: 0xC694 ---- RAM-ADDRESS: 0x964 ---- SIZE       4 ---
+Name of initialized Object : Macro_array:98
+ 80008080
+------- ROM-ADDRESS: 0xC698 ---- SIZE       4 ---
+Filling bytes inserted
+ 00000000
+------- ROM-ADDRESS: 0xC69C ---- RAM-ADDRESS: 0x96C ---- SIZE       4 ---
+Name of initialized Object : Macro_array:106
+ 80008080
+------- ROM-ADDRESS: 0xC6A0 ---- SIZE       4 ---
+Filling bytes inserted
+ 00000000
+------- ROM-ADDRESS: 0xC6A4 ---- RAM-ADDRESS: 0x974 ---- SIZE      12 ---
+Name of initialized Object : Macro_array:114
+ 8000808000 0003008000 8080
+------- ROM-ADDRESS: 0xC6B0 ---- SIZE       4 ---
+Filling bytes inserted
+ 00150A4A
+------- ROM-ADDRESS: 0xC6B4 ---- RAM-ADDRESS: 0xA4A ---- SIZE       2 ---
+Name of initialized Object : Scheme1
+ 0206
+------- ROM-ADDRESS: 0xC6B6 ---- SIZE       5 ---
+Filling bytes inserted
+ 0000000000
+------- ROM-ADDRESS: 0xC6BB ---- RAM-ADDRESS: 0xA51 ---- SIZE       7 ---
 Name of initialized Object : Scheme2
- 0B0C0D0E0F 1011
-------- ROM-ADDRESS: 0xC66D ---- RAM-ADDRESS: 0xA10 ---- SIZE       7 ---
+ 1415161718 191A
+------- ROM-ADDRESS: 0xC6C2 ---- RAM-ADDRESS: 0xA58 ---- SIZE       7 ---
 Name of initialized Object : Scheme4
- 191A1B1C1D 1E1F
-------- ROM-ADDRESS: 0xC674 ---- SIZE       2 ---
+ 2223242526 2728
+------- ROM-ADDRESS: 0xC6C9 ---- SIZE       2 ---
 Filling bytes inserted
  0000
 
@@ -1457,5 +1502,5 @@ STATISTIC SECTION
 ExeFile:
 --------
 Number of blocks to be downloaded: 7
-Total size of all blocks to be downloaded: 1660
+Total size of all blocks to be downloaded: 1745
 
