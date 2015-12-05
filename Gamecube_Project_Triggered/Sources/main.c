@@ -12,7 +12,6 @@ void main(void)
 
 	for(;;)
 	{
-		Transaction_Complete = 1;
 		if (Transaction_Complete)
 		{
 			// Clear Transaction_Complete flag
