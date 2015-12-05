@@ -35,7 +35,7 @@ typedef struct MacroFrame_st MacroFrame;
 #define MACRO27 27
 #define MACRO28 28
 
-struct Macro_st
+struct MacroFrame_st
 {
 	// The current Input-Frame of the macro (e.g "The fifth frame, the sixth frame, etc.")
 	unsigned int Frame;
@@ -46,6 +46,6 @@ struct Macro_st
 // Gets the next frame of the macro and puts it in "output".
 // Returns a bool value that is true if the returned output is
 // the last last valid macro frame. Otherwise returns false.
-bool GetMacroInput(MacroFrame frame, Input* output);
+int GetMacroInput(MacroFrame frame, Input* output);
 
 #endif /* MACRO_INCLUDED */
