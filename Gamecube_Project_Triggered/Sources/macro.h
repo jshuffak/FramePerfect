@@ -9,7 +9,7 @@ typedef struct MacroFrame_st MacroFrame;
 //The size of each macro
 #define MAC_1 2
 #define MAC_2 4
-#define MAC_3 1
+#define MAC_3 10
 #define MAC_4 1
 #define MAC_5 1
 #define MAC_6 1
