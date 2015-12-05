@@ -1,6 +1,6 @@
 #include "macro.h"
-#DEFINE MACRO_SIZE 28
-#DEFINE MAC_1 1
+#define MACRO_SIZE 28
+#define MAC_1 1
 
 //Definitions
 Input Macro_array[MACRO_SIZE];
