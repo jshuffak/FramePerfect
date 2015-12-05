@@ -1,36 +1,82 @@
 #include "microcontroller.h"
 
+/* Constant definitions */
 #define INITIALIZEWAIT 26666
 #define ENSURESTARTWAIT 18
 
 /* PIN Definitions */
-#define DATALINE PTT_PTT4
+#define DATALINE              PTT_PTT4
+#define TRANSMISSION_GATE     PTT_PTT5
+#define OUTPUT_BEGIN          PTT_PTT6
+
+//Static function declarations
 
 static void waitForInitialization(void);
+static void getInput(char* readData);               //Communicate with the controller and console
+static void shiftOutConrollerPacket(char* packet);  //Send the next packet out to the GAL
 
-int DigitalSwitch = 0;
-int EdgeCounter = 0;
-int TimeCounter = 0; // Jordan i didn't add this into the .h file
-//volatile Input* FrameInput = (Input*)malloc(sizeof(Input)); // if we are to load this in a, it needs to be a pointer to the beginning of a struct
-Input FrameInputThing;
-Input* FrameInput = &FrameInputThing;
-byte* FrameByte = NULL; //(byte*)FrameInput;
-byte byteCounter = 0;
-int CurrentValue = 0;
-byte bitCounter = 1;
+
+
+
 
 void initializations()
 {
 	DisableInterrupts;
-	//enable timer 
-	//TSCR1 = 0x80; 
-	// interrupt from wrap around disabled, counter reset by successful output compare 7, and pre scale set to 1
-	//TSCR2 = 0x08; 
-	// enable the output compare function
-	//TIE  = 0x00; 
-	//set the interrupt rate to be approximately 2ms.
-	//TC7 = 50; 
-	// Initiate IRQ interrupt, which has higher priority over the TIM interrupt
+
+
+/* Set the PLL speed (bus clock = 24 MHz) */
+  CLKSEL = CLKSEL & 0x80; //; disengage PLL from system
+  PLLCTL = PLLCTL | 0x40; //; turn on PLL
+  SYNR = 0x02;            //; set PLL multiplier
+  REFDV = 0;              //; set PLL divider
+  while (!(CRGFLG & 0x08)){  }
+  CLKSEL = CLKSEL | 0x80; //; engage PLL
+
+/* Disable watchdog timer (COPCTL register) */
+  COPCTL = 0x40   ; //COP off; RTI and COP stopped in BDM-mode
+
+/* Initialize asynchronous serial port (SCI) for 9600 baud, interrupts off initially */
+  SCIBDH =  0x00; //set baud rate to 9600
+  SCIBDL =  0x9C; //24,000,000 / 16 / 156 = 9600 (approx)  
+  SCICR1 =  0x00; //$9C = 156
+  SCICR2 =  0x0C; //initialize SCI for program-driven operation
+  DDRB   =  0x10; //set PB4 for output mode
+  PORTB  =  0x10; //assert DTR pin on COM port
+
+/* Initialize peripherals */
+        
+  DDRT = 0xFF;
+  ATDDIEN = 0xC0;
+  DDRAD = 0;
+  DDRM = 0xFF;
+  
+/* Initialize SPI for 6Mbps*/
+  SPICR1 = 0x50;
+  SPICR2 = 0; 
+  SPIBR = 0x10;       
+            
+/* Initialize interrupts */
+
+  CRGINT = CRGINT | 0x80;
+  TCTL2 = 0x40; //Toggle pin when timer goes off
+  TCTL1 = 0x40;
+  TSCR1 = 0x80; //Enable timer subsystem.
+  TSCR2 = 0x08; //Dont prescale
+    
+  TIOS = 0x80;   //Set Ch 7 for output compare.
+  TC7 = 11; //1ms interrupt rate
+  TIE = 0;
+  
+  SPICR1 = 0x50;
+  SPICR2 = 0x00;
+  SPIBR = 0x10;        
+              
+              
+  DDRT=0x60;
+  //pin 4 will be used to read 
+  PTT_PTT5 = 1; //Enable transmission gate
+	
+	//Enable IRQ
 	INTCR_IRQE = 1;
 
 	waitForInitialization();
@@ -39,6 +85,7 @@ void initializations()
 	EnableInterrupts;
 
 }
+
 
 // Waits 40 ms for the initialization routine to complete and another
 // 40 micro seconds for the data line to remain high
@@ -56,87 +103,70 @@ static void waitForInitialization()
 	}
 }
 
+
+void getInput(char* readData){
+  int i, currentChar;
+  byte bitPos;
+  
+  for(currentChar=0;currentChar<8;currentChar++){
+    readData[currentChar]=0;
+  }
+  
+  for(currentChar=0;currentChar<25;currentChar++){ //blow through the console data
+    while(PTT_PTT4);  //Wait for falling edge
+    while(!PTT_PTT4); //Wait for rising edge
+  }
+  
+  PTT_PTT5=0; //Cut transmission gate
+  
+  for(i=0;i<3;i++);
+  PTT_PTT6=1; //Begin output from GAL
+  for(i=0;i<5;i++);
+  PTT_PTT6=0;
+  
+  currentChar=0;
+  bitPos=1;
+  while(currentChar<8){
+    while(PTT_PTT4);   //Wait for falling edge
+    for(i=0;i<5;i++);                 //Delay 1.25us
+    
+    if(PTT_PTT4)                      //Read data
+      readData[currentChar] |= bitPos;
+    bitPos = bitPos<<1;
+    if(bitPos==0){
+      currentChar++;
+      bitPos=1;
+    }
+       
+    while(!PTT_PTT4); //Ensure we are on the top edge
+   }
+   
+   for(i=0;i<20;i++); //Hopefully we are done outputting now
+   PTT_PTT5=1;        //Re-enable the trasmission gate
+  
+}
+
+void shiftOutConrollerPacket(char* packet){
+  int i;
+  byte b;
+  for(i=0;i<8;i++) {
+    b = packet[i];
+    b = (b & 0xF0) >> 4 | (b & 0x0F) << 4;
+    b = (b & 0xCC) >> 2 | (b & 0x33) << 2;
+    b = (b & 0xAA) >> 1 | (b & 0x55) << 1;  //Reverse the order of the bits
+    shiftout(b);
+  }
+}
+
+
 interrupt 6 void IRQ_ISR()
 {
 
-	EdgeCounter++;	//for every falling edge, add one to a counter. We want to wait to read controller data at the 25th edge
-	if(EdgeCounter > 24& <= 88)
-	{
-		while(DATALINE) // precautionary
-		{
-		}
-		while(TimeCounter <= 2)//according to me research, this be exactly 2ms of delay. lmao
-		{
-			TimeCounter++;
-		}
-		TimeCounter == 0;
-		CurrentValue = DATALINE;
-		if(CurrentValue == 1)
-		{
-			asm{
-					ldaa FrameByte
-					oraa bitCounter
-					psha FrameByte
-					
-				}
-		}
-				if(bitCounter != 128) //note to Jordan, I don't know how to use labels to use branches in asm{} but if you can, be my guest. 2 microsec is actually 48 clock cycles
-				{
-					bitCounter = bitcounter<<1
-				}
-				else{
-						bitCounter == 1;
-						FrameByte++;
-					}
-				
-		}
-		if(EdgeCounter == 88)
-			{
-				EdgeCounter == 0;
-				bitCounter == 1; //maybe useless code
-			}
-				
-			
-		while(!DATALINE)
-		{
-		}
-	//	asm
-	//{
-				// 
-		//		iny				//one cycles
-			//	cpy #25			//three cycles
-				//bgt controller			//one or three cycles
-			//	rts
-		
-//	controller	movb #1, TIE_C7I // 4  clock cycles
-	//			lsl bitCounter
-		//		rts
-//	}
-	
-	/* Equivalent C Code
-		TIE = 0x80;
-	*/
 }
 	
 interrupt 15 void TIM_ISR(void)
 {
-	//asm
-	//{
-		//bset TFLG1, $80			// 4 clock cycles
-		//ldaa FrameInput			//
-		//oraa 0,bitCounter
-		//psha FrameInput
-		//cmpa 
-		//movb #0, TIE_C7I			// 4 clock cycles
-	}
-	//TFLG1 = TFLG1 | 0x80; 
-	//if(counterbit <8)
-	//	orcc the corresponding bitcounter in the byte
-	//else
-	//	increment the memory by one and add one to counter so on the next byte
-	
-	 
-	//TIE = 0x00;
+
 }
 
 char inchar()
