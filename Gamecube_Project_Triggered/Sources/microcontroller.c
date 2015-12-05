@@ -87,7 +87,7 @@ void initializations()
 	INTCR_IRQE = 0;
   TRANSMISSION_GATE = 1;
   PTT_PTT1 = 1;
-	waitForInitialization();
+	//waitForInitialization();
 	PTT_PTT1 = 0; 
 	
 	//Enable Interrupts

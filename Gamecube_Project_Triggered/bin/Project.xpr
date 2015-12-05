@@ -1,0 +1,5 @@
+Data:1 < ADDXPR ONLY_ADD_IF_NEW "control.c::CurrentFrame"
+Data:1 < ADDXPR ONLY_ADD_IF_NEW "control.c::Mode"
+Data:2 < ADDXPR ONLY_ADD_IF_NEW ":GetNextInput:output.DLeft"
+Data:2 < ADDXPR ONLY_ADD_IF_NEW ":GetNextInput:input"
+Data:2 < ADDXPR ONLY_ADD_IF_NEW ":GetNextInput:output.Garbage"
