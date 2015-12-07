@@ -31,6 +31,8 @@ byte  Transaction_Complete = 0;
 void initializations()
 
 {
+  Input initialInput = { 3, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 255, 128, 128, 0, 0 };
+
 	DisableInterrupts;
 
 
@@ -91,7 +93,7 @@ void initializations()
 	waitForInitialization();
 	PTT_PTT1 = 0;
 
-	setOutputFrame({ 3, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 255, 128, 128, 0, 0 });
+	setOutputFrame(initialInput);
 
 	// Set the cop timer
 	COPCTL = 0x41;
@@ -258,4 +260,3 @@ void setOutputFrame(Input banana){
 	OutputBuffer = banana;
 	shiftOutConrollerPacket((char*)(&OutputBuffer));
 }
-
