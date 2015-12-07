@@ -35,7 +35,7 @@ static Input startMacro(int macro)
 	return output;
 }
 
-static void reorganizeInput(Input* input, Input* output, unsigned char leftSlider, unsigned char rightSlider)
+static void reorganizeInput(Input* input, Input* output, unsigned char leftSlider, unsigned char rightSlider, unsigned char xJoy, unsigned char yJoy)
 {
 	output->Garbage = 0;
 	output->Start = input->Start;
@@ -59,8 +59,8 @@ static void reorganizeInput(Input* input, Input* output, unsigned char leftSlide
 	output->DDown = 0;
 	output->DRight = 0;
 	output->DLeft = 0;
-	output->JoyX = input->JoyX;
-	output->JoyY = input->JoyY;
+	output->JoyX = xJoy;
+	output->JoyY = yJoy;
 	output->CStickX = input->CStickX;
 	output->CStickY = input->CStickY;
 	output->LeftButt = leftSlider;
@@ -71,6 +71,8 @@ Input GetNextInput(Input input)
 {
 	unsigned char leftSlider = input.LeftButt;
 	unsigned char rightSlider = input.RightButt;
+	unsigned char xJoy = input.JoyX;
+	unsigned char yJoy = input.JoyY;
 	unsigned char macrobutton;
 	Input output = {0};
 
@@ -108,6 +110,8 @@ Input GetNextInput(Input input)
 
 			leftSlider = 0;
 			rightSlider = 0;
+			xJoy = 128;
+			yJoy = 128;
 		}
 
 		// If a D-Pad button is pressed, switch the scheme
@@ -122,7 +126,7 @@ Input GetNextInput(Input input)
 			ActiveScheme = &Scheme4;
 
 		// Return current state of inputs from the controller masking the D-Pad and the MacroButton
-		reorganizeInput(&input, &output, leftSlider, rightSlider);
+		reorganizeInput(&input, &output, leftSlider, rightSlider, xJoy, yJoy);
 		return output;
 	}
 
