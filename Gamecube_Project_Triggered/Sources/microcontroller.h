@@ -21,8 +21,8 @@ extern byte* FrameByte;
 
 //A flag to tell whether or not the packet has been communicated yet.  This should be cleared
 //by control.h when it has read the flag
-extern byte Transaction_Complete; 
-                                  
+extern byte Transaction_Complete;
+
 
 
 //Functions
