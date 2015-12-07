@@ -97,13 +97,13 @@ Input GetNextInput(Input input)
 				return startMacro(ActiveScheme->RightTrigger);
 			if (input.L)
 				return startMacro(ActiveScheme->LeftTrigger);
-			if (input.JoyX > 170)
+			if (input.JoyX > 225)
 				return startMacro(ActiveScheme->RightArrow);
-			if (input.JoyY < 80)
+			if (input.JoyY < 30)
 				return startMacro(ActiveScheme->DownArrow);
-			if (input.JoyY > 170)
+			if (input.JoyY > 225)
 				return startMacro(ActiveScheme->UpArrow);
-			if (input.JoyX < 80)
+			if (input.JoyX < 30)
 				return startMacro(ActiveScheme->LeftArrow);
 			if (input.Z)
 				return startMacro(ActiveScheme->ZButton);
