@@ -91,6 +91,8 @@ void initializations()
 	waitForInitialization();
 	PTT_PTT1 = 0;
 
+	setOutputFrame({ 3, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 255, 128, 128, 0, 0 });
+
 	// Set the cop timer
 	COPCTL = 0x41;
 

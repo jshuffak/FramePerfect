@@ -15,7 +15,6 @@ void main(void)
 		// MicroController is working properly
 		ClearWatchdogTimer();
 
-		Transaction_Complete = 1;
 		if (Transaction_Complete)
 		{
 			// Clear Transaction_Complete flag
