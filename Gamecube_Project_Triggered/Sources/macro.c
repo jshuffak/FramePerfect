@@ -29,7 +29,7 @@ Input Macro_array[MAC_1 + MAC_2 + MAC_3 + MAC_4 + MAC_5 + MAC_6 + MAC_7 + MAC_8 
 
 
 
-GetMacroInput(MacroFrame frame, Input* output)
+int GetMacroInput(MacroFrame frame, Input* output)
 {
 
 
