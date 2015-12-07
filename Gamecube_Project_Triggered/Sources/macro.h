@@ -9,12 +9,12 @@ typedef struct MacroFrame_st MacroFrame;
 //The size of each macro
 #define MAC_1 2
 #define MAC_2 5
-#define MAC_3 12
+#define MAC_3 11
 #define MAC_4 3
-#define MAC_5 5
+#define MAC_5 88
 #define MAC_6 6
-#define MAC_7 16
-#define MAC_8 1
+#define MAC_7 15
+#define MAC_8 20
 #define MAC_9 1
 #define MAC_10 1
 #define MAC_11 1
@@ -77,6 +77,6 @@ struct MacroFrame_st
 // Gets the next frame of the macro and puts it in "output".
 // Returns a bool value that is true if the returned output is
 // the last last valid macro frame. Otherwise returns false.
-int GetMacroInput(MacroFrame frame, Input* output);
+int GetMacroInput(MacroFrame frame, Input* output, Input* input);
 
 #endif /* MACRO_INCLUDED */
