@@ -36,5 +36,6 @@ void delay(int);          //An arbitary delay function.  Should probably be used
 
 Input getInputFrame(void);  //Get the last input frame provided by the controller
 void setOutputFrame(Input); //set which frame will be communicated to the console next
+void ClearWatchdogTimer(void); // Tells the micro to clear the watchdog timer.
 
 #endif /* MICRO_INCLUDED */

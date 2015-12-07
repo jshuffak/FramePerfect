@@ -12,6 +12,9 @@ void main(void)
 
 	for(;;)
 	{
+		// MicroController is working properly
+		ClearWatchdogTimer();
+
 		Transaction_Complete = 1;
 		if (Transaction_Complete)
 		{

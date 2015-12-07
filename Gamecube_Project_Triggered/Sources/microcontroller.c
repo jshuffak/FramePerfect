@@ -21,7 +21,7 @@ static void shiftOutConrollerPacket(char* packet);  //Send the next packet out t
 Input InputBuffer;
 Input OutputBuffer;
 byte  Transaction_Complete = 0;
-byte panic = 0;
+//byte panic = 0;
 
 
 
@@ -90,6 +90,9 @@ void initializations()
 	PTT_PTT1 = 1;
 	waitForInitialization();
 	PTT_PTT1 = 0;
+
+	// Set the cop timer
+	COPCTL = 0x41;
 
 	//RTI Interrupt rate
 	//RTICTL = 0x15; //The panic rate 600 us ish
@@ -185,6 +188,11 @@ static void shiftOutConrollerPacket(char* packet){
 	}
 }
 
+void ClearWatchdogTimer()
+{
+	ARMCOP = 0x55;
+	ARMCOP = 0xAA;
+}
 
 interrupt 6 void IRQ_ISR()
 {
