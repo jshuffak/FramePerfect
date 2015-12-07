@@ -31,7 +31,7 @@ byte  Transaction_Complete = 0;
 void initializations()
 
 {
-  Input initialInput = { 3, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 255, 128, 128, 0, 0 };
+  Input initialInput = { 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 128, 128, 128, 0, 0 };
 
 	DisableInterrupts;
 
@@ -151,7 +151,7 @@ void getInput(char* readData){
 	bitPos = 1;
 	while (currentChar<8){
 		while (PTT_PTT4);   //Wait for falling edge
-		for (i = 0; i<5; i++);                 //Delay 1.25us
+		for (i = 0; i<6; i++);                 //Delay 1.25us
 
 		if (PTT_PTT4)                      //Read data
 			readData[currentChar] |= bitPos;
