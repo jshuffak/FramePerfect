@@ -202,32 +202,32 @@ int GetMacroInput(MacroFrame frame, Input* output, Input* input)
 
 
   output->Garbage = 0;
-  output->Start = Macro_array[(int)frame.Frame/3 + frame.Macro].Start;
-  output->Y = Macro_array[(int)frame.Frame/3 + frame.Macro].Y;
-  output->X = Macro_array[(int)frame.Frame/3 + frame.Macro].X;
-  output->B = Macro_array[(int)frame.Frame/3 + frame.Macro].B;
-  output->A = Macro_array[(int)frame.Frame/3 + frame.Macro].A;
+  output->Start = Macro_array[(int)frame.Frame/2 + frame.Macro].Start;
+  output->Y = Macro_array[(int)frame.Frame/2 + frame.Macro].Y;
+  output->X = Macro_array[(int)frame.Frame/2 + frame.Macro].X;
+  output->B = Macro_array[(int)frame.Frame/2 + frame.Macro].B;
+  output->A = Macro_array[(int)frame.Frame/2 + frame.Macro].A;
   output->Garbage1 = 1;
-  output->L = Macro_array[(int)frame.Frame/3 + frame.Macro].L;
-  output->R = Macro_array[(int)frame.Frame/3 + frame.Macro].R;
-  output->Z = Macro_array[(int)frame.Frame/3 + frame.Macro].Z;
-  output->DUp = Macro_array[(int)frame.Frame/3 + frame.Macro].DUp;
-  output->DDown = Macro_array[(int)frame.Frame/3 + frame.Macro].DDown;
-  output->DRight = Macro_array[(int)frame.Frame/3 + frame.Macro].DRight;
-  output->DLeft = Macro_array[(int)frame.Frame/3 + frame.Macro].DLeft;
-  if (Macro_array[(int)frame.Frame/3 + frame.Macro].JoyX == 129)
+  output->L = Macro_array[(int)frame.Frame/2 + frame.Macro].L;
+  output->R = Macro_array[(int)frame.Frame/2 + frame.Macro].R;
+  output->Z = Macro_array[(int)frame.Frame/2 + frame.Macro].Z;
+  output->DUp = Macro_array[(int)frame.Frame/2 + frame.Macro].DUp;
+  output->DDown = Macro_array[(int)frame.Frame/2 + frame.Macro].DDown;
+  output->DRight = Macro_array[(int)frame.Frame/2 + frame.Macro].DRight;
+  output->DLeft = Macro_array[(int)frame.Frame/2 + frame.Macro].DLeft;
+  if (Macro_array[(int)frame.Frame/2 + frame.Macro].JoyX == 129)
     output->JoyX = input->JoyX;
   else
-    output->JoyX = Macro_array[(int)frame.Frame/3 + frame.Macro].JoyX;
-  if (Macro_array[(int)frame.Frame/3 + frame.Macro].JoyY == 129)
+    output->JoyX = Macro_array[(int)frame.Frame/2 + frame.Macro].JoyX;
+  if (Macro_array[(int)frame.Frame/2 + frame.Macro].JoyY == 129)
     output->JoyY = input->JoyY;
   else
-    output->JoyY = Macro_array[(int)frame.Frame/3 + frame.Macro].JoyY;
-  output->CStickX = Macro_array[(int)frame.Frame/3 + frame.Macro].CStickX;
-  output->CStickY = Macro_array[(int)frame.Frame/3 + frame.Macro].CStickY;
-  output->LeftButt = Macro_array[(int)frame.Frame/3 + frame.Macro].LeftButt;
-  output->RightButt = Macro_array[(int)frame.Frame/3 + frame.Macro].RightButt;
-  if((Macro_array[(int)frame.Frame/3 + frame.Macro].Garbage == 3 && (frame.Frame % 3 == 2)))
+    output->JoyY = Macro_array[(int)frame.Frame/2 + frame.Macro].JoyY;
+  output->CStickX = Macro_array[(int)frame.Frame/2 + frame.Macro].CStickX;
+  output->CStickY = Macro_array[(int)frame.Frame/2 + frame.Macro].CStickY;
+  output->LeftButt = Macro_array[(int)frame.Frame/2 + frame.Macro].LeftButt;
+  output->RightButt = Macro_array[(int)frame.Frame/2 + frame.Macro].RightButt;
+  if((Macro_array[(int)frame.Frame/2 + frame.Macro].Garbage == 3 && (frame.Frame % 2 == 1)))
   {
     
     return 1;
