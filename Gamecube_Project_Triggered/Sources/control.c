@@ -13,7 +13,7 @@ unsigned char macroButton = 0;
 */
 unsigned char Mode = 0;
 
-static Input startMacro(int macro)
+static Input startMacro(int macro, Input* input)
 {
 	Input output = {0};
 
@@ -26,7 +26,7 @@ static Input startMacro(int macro)
 
 	// Get first frame of Macro
 	// If last frame enter echo mode
-	if (GetMacroInput(CurrentFrame, &output))
+	if (GetMacroInput(CurrentFrame, &output, input))
 		Mode = 0;
 
 	// Increment the frame
@@ -94,19 +94,19 @@ Input GetNextInput(Input input)
 		{
 			// Find the first valid macro and return the first frame of it.
 			if (input.R)
-				return startMacro(ActiveScheme->RightTrigger);
+				return startMacro(ActiveScheme->RightTrigger, &input);
 			if (input.L)
-				return startMacro(ActiveScheme->LeftTrigger);
+				return startMacro(ActiveScheme->LeftTrigger, &input);
 			if (input.JoyX > 225)
-				return startMacro(ActiveScheme->RightArrow);
+				return startMacro(ActiveScheme->RightArrow, &input);
 			if (input.JoyY < 30)
-				return startMacro(ActiveScheme->DownArrow);
+				return startMacro(ActiveScheme->DownArrow, &input);
 			if (input.JoyY > 225)
-				return startMacro(ActiveScheme->UpArrow);
+				return startMacro(ActiveScheme->UpArrow, &input);
 			if (input.JoyX < 30)
-				return startMacro(ActiveScheme->LeftArrow);
+				return startMacro(ActiveScheme->LeftArrow, &input);
 			if (input.Z)
-				return startMacro(ActiveScheme->ZButton);
+				return startMacro(ActiveScheme->ZButton, &input);
 
 			leftSlider = 0;
 			rightSlider = 0;
@@ -135,7 +135,7 @@ Input GetNextInput(Input input)
 	{
 		// Get frame of Macro
 		// If last frame enter echo mode
-		if (GetMacroInput(CurrentFrame, &output))
+		if (GetMacroInput(CurrentFrame, &output, &input))
 			Mode = 0;
 
 		// Increment the frame
