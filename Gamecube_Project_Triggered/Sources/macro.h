@@ -11,10 +11,10 @@ typedef struct MacroFrame_st MacroFrame;
 #define MAC_2 5
 #define MAC_3 15
 #define MAC_4 4
-#define MAC_5 88
-#define MAC_6 6
-#define MAC_7 15
-#define MAC_8 20
+#define MAC_5 85
+#define MAC_6 5
+#define MAC_7 17
+#define MAC_8 1
 #define MAC_9 1
 #define MAC_10 1
 #define MAC_11 1
