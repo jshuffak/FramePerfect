@@ -14,7 +14,7 @@ typedef struct MacroFrame_st MacroFrame;
 #define MAC_5 85
 #define MAC_6 5
 #define MAC_7 20
-#define MAC_8 35
+#define MAC_8 40
 #define MAC_9 1
 #define MAC_10 1
 #define MAC_11 1
