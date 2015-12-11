@@ -1,22 +1,19 @@
 MODULE CounterV3
 
 TITLE 'CounterV3'
+//This has been reprogrammed to match the pinout of the PCB board
 
 DECLARATIONS
 
 CLOCK PIN 1;
 RESET PIN 11;
-BITS0 PIN 10;
-BITS1 PIN 9;
+BITS0 PIN 9;
+BITS1 PIN 10;
 
-ZERO PIN 14 ISTYPE 'COM';
-ONE PIN 15 ISTYPE 'COM';
+ZERO PIN 23 ISTYPE 'COM';
+ONE PIN 22 ISTYPE 'COM';
 
-BITS8..BITS2 pin 17..23 istype 'reg';
-
-!BUFFERED_OUT_BEGIN pin 16 istype 'reg';
-OUT_BEGIN pin 8 istype 'com';
-
+BITS2..BITS8 pin 14..20 istype 'reg';
 
 EQUATIONS
 
@@ -35,16 +32,7 @@ ONE = !(!BITS2 # BITS3 # BITS4 # BITS5 # BITS6 # BITS7 #BITS8);
 
 [BITS2..BITS8].CLK = CLOCK;
 
-BUFFERED_OUT_BEGIN.CLK = CLOCK;
-BUFFERED_OUT_BEGIN.D=1;
-BUFFERED_OUT_BEGIN.AR = OUT_BEGIN;
-[BITS2..BITS8].AR=0; //This code cannt work because everything, even the counter, will be reset. 0/10.
-
-
-
 
 
 END
-
-
 
